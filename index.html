@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!-- 
+PALETTE: Brilliant Blues & Energetic Amber (Primary: #1D4ED8, Secondary: #0EA5E9, Accent: #F59E0B)
+CONFIRMATION: NEITHER Mermaid JS NOR SVG were used anywhere in the output.
+PLAN: 
+1. Header: Event identity and core details.
+2. KPI Overview: Quick glance at the event's scale (Days, Speakers, Tracks).
+3. Schedule Breakdown: Chart.js Bar chart showing time allocation for different event goals.
+4. The Journey (Timeline): Structured HTML/CSS chronological flow of Day 1 & Day 2.
+5. Day 2 Tracks: Comparison cards for Golf vs. Tour.
+6. Budget Estimation: Chart.js Doughnut chart visualizing the expected budget distribution categories.
+CHOICES:
+- Time Allocation -> Goal: Compare -> Bar Chart (Chart.js) -> Best for comparing duration of distinct activity types. NO SVG.
+- Event Journey -> Goal: Organize -> Timeline (HTML/CSS) -> Best for chronological steps. NO SVG.
+- Track 1 vs 2 -> Goal: Compare -> Side-by-side Cards (HTML/CSS) -> Best for categorical features. NO SVG.
+- Budget Mix -> Goal: Composition -> Doughnut Chart (Chart.js) -> Best for showing part-to-whole relationships. NO SVG.
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 KPC 한국생산성본부 총교류회 기획</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #F8FAFC;
+            color: #1E293B;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 1rem;
+            height: 100%;
+            width: 4px;
+            background: #0EA5E9;
+            border-radius: 2px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
+</head>
+<body class="antialiased pb-20">
+
+    <header class="bg-gradient-to-r from-[#1D4ED8] to-[#0EA5E9] text-white py-16 px-6 shadow-lg mb-10 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto relative z-10 text-center">
+            <h2 class="text-amber-400 font-bold text-xl tracking-wider mb-2">NETWORK & INSIGHT</h2>
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">2026 KPC 한국생산성본부<br>총교류회</h1>
+            <p class="text-lg md:text-xl text-blue-100 font-light max-w-2xl mx-auto mb-8">
+                일상에서 벗어나 부여의 수려한 자연경관 속에서 펼쳐지는 배움과 화합, 그리고 재충전의 시간. KPC 원우님들을 위한 고품격 네트워킹 행사를 기획합니다.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 text-sm md:text-base font-medium">
+                <span class="bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm">📅 2026. 06. 11 - 06. 12</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm">📍 롯데리조트 부여 일대</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 space-y-16">
+
+        <section>
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-[#1D4ED8] mb-2">📊 Key Highlights</h3>
+                <p class="text-gray-600">행사의 핵심 규모와 주요 구성을 한눈에 파악할 수 있는 지표입니다.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card rounded-2xl p-8 text-center shadow-md transform hover:-translate-y-1 transition duration-300">
+                    <div class="text-5xl mb-4">🎤</div>
+                    <div class="text-4xl font-black text-[#1D4ED8] mb-2">2명</div>
+                    <div class="text-gray-600 font-medium">최고 권위 명사 특강<br><span class="text-sm">(권영수 부회장 / 김경일 교수)</span></div>
+                </div>
+                <div class="glass-card rounded-2xl p-8 text-center shadow-md transform hover:-translate-y-1 transition duration-300">
+                    <div class="text-5xl mb-4">🤝</div>
+                    <div class="text-4xl font-black text-[#0EA5E9] mb-2">2Track</div>
+                    <div class="text-gray-600 font-medium">맞춤형 힐링 프로그램<br><span class="text-sm">(친선 골프 라운딩 / 부여 명소 관광)</span></div>
+                </div>
+                <div class="glass-card rounded-2xl p-8 text-center shadow-md transform hover:-translate-y-1 transition duration-300">
+                    <div class="text-5xl mb-4">🎁</div>
+                    <div class="text-4xl font-black text-[#F59E0B] mb-2">1.5시간</div>
+                    <div class="text-gray-600 font-medium">화합의 밤 & 레크리에이션<br><span class="text-sm">(전문 MC 진행 및 경품 추첨)</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <div>
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-[#1D4ED8] mb-2">⏱ 프로그램 목적별 시간 배분</h3>
+                    <p class="text-gray-600">참가자들의 피로도를 최소화하고 지식 함양과 네트워킹의 균형을 맞춘 최적의 시간 분배를 기획했습니다.</p>
+                </div>
+                <div class="glass-card rounded-2xl p-6 shadow-md">
+                    <div class="chart-container">
+                        <canvas id="timeAllocationChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-[#1D4ED8] mb-2">💰 예산 운영 계획 (카테고리별 비중)</h3>
+                    <p class="text-gray-600">성공적인 행사 운영을 위한 항목별 예산 분배 시뮬레이션입니다. (세부 내역은 별첨 엑셀 참조)</p>
+                </div>
+                <div class="glass-card rounded-2xl p-6 shadow-md flex items-center justify-center">
+                    <div class="chart-container">
+                        <canvas id="budgetChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-3xl p-8 md:p-12 shadow-lg border-t-4 border-[#0EA5E9]">
+            <div class="mb-10 text-center">
+                <h3 class="text-3xl font-black text-[#1E293B] mb-4">행사 타임라인 & 여정</h3>
+                <p class="text-gray-600 max-w-2xl mx-auto">1박 2일간 펼쳐질 다채로운 프로그램의 상세 일정입니다. 원활한 동선과 참석자의 만족도를 최우선으로 고려했습니다.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative">
+                <div class="relative timeline-container pl-10">
+                    <h4 class="text-xl font-bold text-[#1D4ED8] mb-6 inline-block bg-blue-50 px-4 py-2 rounded-lg border border-blue-100">Day 1 : 배움과 화합 (6/11 목)</h4>
+                    
+                    <div class="mb-8 relative">
+                        <div class="absolute -left-[35px] top-1.5 w-4 h-4 rounded-full bg-[#0EA5E9] border-4 border-white shadow"></div>
+                        <div class="text-sm font-bold text-[#0EA5E9] mb-1">11:00 - 14:00</div>
+                        <h5 class="font-bold text-lg mb-2">도착 및 오찬 교류</h5>
+                        <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">롯데리조트 부여 프론트 집결 및 방 배정. 이후 연회장에서 참석자 간 첫인사 및 오찬 식사 진행.</p>
+                    </div>
+
+                    <div class="mb-8 relative">
+                        <div class="absolute -left-[35px] top-1.5 w-4 h-4 rounded-full bg-[#1D4ED8] border-4 border-white shadow"></div>
+                        <div class="text-sm font-bold text-[#1D4ED8] mb-1">14:30 - 17:00</div>
+                        <h5 class="font-bold text-lg mb-2">명사 특강 (인사이트 공유)</h5>
+                        <p class="text-gray-600 text-sm bg-blue-50 p-3 rounded-lg border border-blue-100">
+                            <strong>[강의 1] 권영수 부회장</strong> (기업 경영 및 혁신)<br>
+                            <strong>[강의 2] 김경일 교수</strong> (인지심리학 바탕의 조직 소통)
+                        </p>
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute -left-[35px] top-1.5 w-4 h-4 rounded-full bg-[#F59E0B] border-4 border-white shadow"></div>
+                        <div class="text-sm font-bold text-[#F59E0B] mb-1">17:30 - 21:00</div>
+                        <h5 class="font-bold text-lg mb-2">만찬 및 화합의 밤</h5>
+                        <p class="text-gray-600 text-sm bg-amber-50 p-3 rounded-lg border border-amber-100">저녁 만찬 후, 개그맨 송필근 외 1명의 진행으로 레크리에이션 및 경품 추첨. 이후 자유로운 친교 시간.</p>
+                    </div>
+                </div>
+
+                <div class="relative timeline-container pl-10">
+                    <h4 class="text-xl font-bold text-[#10B981] mb-6 inline-block bg-emerald-50 px-4 py-2 rounded-lg border border-emerald-100">Day 2 : 힐링과 친목 (6/12 금)</h4>
+                    
+                    <div class="mb-8 relative">
+                        <div class="absolute -left-[35px] top-1.5 w-4 h-4 rounded-full bg-gray-400 border-4 border-white shadow"></div>
+                        <div class="text-sm font-bold text-gray-500 mb-1">06:00 - 07:30</div>
+                        <h5 class="font-bold text-lg mb-2">조식 및 기념촬영</h5>
+                        <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">기상 후 리조트 뷔페 조식. 로비에 집결하여 단체 기념촬영 및 오전 일정 인원 점검.</p>
+                    </div>
+
+                    <div class="mb-8 relative">
+                        <div class="absolute -left-[35px] top-1.5 w-4 h-4 rounded-full bg-[#10B981] border-4 border-white shadow"></div>
+                        <div class="text-sm font-bold text-[#10B981] mb-1">07:30 - 12:30</div>
+                        <h5 class="font-bold text-lg mb-2">선택형 액티비티 (투트랙)</h5>
+                        <div class="flex flex-col gap-2 mt-2">
+                            <div class="bg-emerald-50 p-3 rounded-lg border border-emerald-100 text-sm text-gray-700">
+                                <strong>⛳ 팀 1 : 친선 골프</strong><br>롯데스카이힐 부여 CC 라운딩
+                            </div>
+                            <div class="bg-teal-50 p-3 rounded-lg border border-teal-100 text-sm text-gray-700">
+                                <strong>🚌 팀 2 : 부여 관광</strong><br>백제문화단지 등 부여 핵심 명소 투어
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute -left-[35px] top-1.5 w-4 h-4 rounded-full bg-[#1D4ED8] border-4 border-white shadow"></div>
+                        <div class="text-sm font-bold text-[#1D4ED8] mb-1">13:00 - 15:00</div>
+                        <h5 class="font-bold text-lg mb-2">오찬, 시상 및 환송</h5>
+                        <p class="text-gray-600 text-sm bg-blue-50 p-3 rounded-lg border border-blue-100">전체 인원 재합류 후 중식. 골프 니어리스트/롱기스트 시상 및 전체 참가자 기념품 전달. 행사 종료 및 귀가.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#1E293B] text-slate-300 py-10 mt-16 text-center text-sm">
+        <p class="mb-2 font-bold text-white">2026 KPC 한국생산성본부 총교류회 준비위원회</p>
+        <p>본 인포그래픽은 기획안 요약용이며, 세부 일정 및 명사, 예산 내역은 진행 상황에 따라 변동될 수 있습니다.</p>
+    </footer>
+
+    <script>
+        const wrapLabel = (label, maxChars = 16) => {
+            if (label.length <= maxChars) return label;
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxChars) {
+                    if (currentLine) lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            if (currentLine) lines.push(currentLine.trim());
+            return lines.length > 1 ? lines : lines[0];
+        };
+
+        const standardTooltipPlugin = {
+            tooltip: {
+                backgroundColor: 'rgba(30, 41, 59, 0.95)',
+                titleFont: { size: 14, family: "'Noto Sans KR', sans-serif" },
+                bodyFont: { size: 13, family: "'Noto Sans KR', sans-serif" },
+                padding: 12,
+                cornerRadius: 8,
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        if (Array.isArray(label)) {
+                            return label.join(' ');
+                        } else {
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        const rawTimeLabels = ['강의 & 지식공유', '네트워킹 & 오찬/만찬', '레크리에이션', '골프/관광 액티비티'];
+        const processedTimeLabels = rawTimeLabels.map(label => wrapLabel(label, 12));
+        
+        const timeCtx = document.getElementById('timeAllocationChart').getContext('2d');
+        new Chart(timeCtx, {
+            type: 'bar',
+            data: {
+                labels: processedTimeLabels,
+                datasets: [{
+                    label: '소요 시간 (시간)',
+                    data: [2, 3.5, 1.5, 5],
+                    backgroundColor: [
+                        '#1D4ED8',
+                        '#0EA5E9',
+                        '#F59E0B',
+                        '#10B981'
+                    ],
+                    borderRadius: 6,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    ...standardTooltipPlugin
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { borderDash: [4, 4], color: '#E2E8F0' },
+                        title: { display: true, text: '소요 시간 (Hours)', color: '#64748B' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { family: "'Noto Sans KR', sans-serif" } }
+                    }
+                }
+            }
+        });
+
+        const rawBudgetLabels = ['숙박 및 대관료', '식음료 (오/만찬 등)', '프로그램 (명사/MC)', '액티비티 (골프/관광)', '시상 및 기념품', '운영 및 예비비'];
+        const processedBudgetLabels = rawBudgetLabels.map(label => wrapLabel(label, 14));
+
+        const budgetCtx = document.getElementById('budgetChart').getContext('2d');
+        new Chart(budgetCtx, {
+            type: 'doughnut',
+            data: {
+                labels: processedBudgetLabels,
+                datasets: [{
+                    data: [25, 30, 15, 15, 10, 5],
+                    backgroundColor: [
+                        '#1D4ED8',
+                        '#0EA5E9',
+                        '#F59E0B',
+                        '#10B981',
+                        '#8B5CF6',
+                        '#94A3B8'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff',
+                    hoverOffset: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            font: { family: "'Noto Sans KR', sans-serif", size: 12 },
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    },
+                    ...standardTooltipPlugin
+                }
+            }
+        });
+    </script>
+</body>
+</html>
